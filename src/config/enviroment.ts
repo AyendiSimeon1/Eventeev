@@ -6,7 +6,10 @@ export const config = {
     },
     jwt: {
       secret: process.env.JWT_SECRET || 'default-secret',
-      expiresIn: '24h'
+      expiresIn: '24h',
+    },
+    google: {
+      clientId: 'google-client-id'
     },
     redis: {
       url: process.env.REDIS_URL

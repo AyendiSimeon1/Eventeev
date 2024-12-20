@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { AppError } from '@/utils/errors';
+import { AppError } from '../../utils/errors';
 
 const registrationSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -13,23 +13,14 @@ const loginSchema = z.object({
   password: z.string().min(1, 'Password is required')
 });
 
+
 export const validateRegistration = (data: unknown) => {
   try {
     return registrationSchema.parse(data);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      throw new AppError(400, error.errors[0].message);
-    }
-    throw error;
-  }
-};
-
-export const validateLogin = (data: unknown) => {
-  try {
-    return loginSchema.parse(data);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      throw new AppError(400, error.errors[0].message);
+      const errorMessage = error.errors.map(err => `${err.path.join('.')} - ${err.message}`).join(', ');
+      throw new AppError(errorMessage);
     }
     throw error;
   }
