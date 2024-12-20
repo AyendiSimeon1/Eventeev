@@ -2,8 +2,8 @@ import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { OAuth2Client } from 'google-auth-library';
 import { User } from '../../infrastructure/database/schemas/userSchema';
-import { Organization } from '../../infrastructure/database/organizationSchema';
-// import { sendEmail } from '../../services/auth/authService';
+import { Organization } from '../../infrastructure/database/organizationSchema'; 
+import { sendEmail } from '../../services/auth/authService';
 import { AppError } from '../../utils/errors';
 import { config } from '../../../config/enviroment';
 
